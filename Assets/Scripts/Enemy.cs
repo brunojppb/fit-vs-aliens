@@ -4,7 +4,8 @@ using System.Collections;
 public class Enemy : MonoBehaviour {
 
 	private Spaceship spaceship;
-	public GameObject explostion;
+	public GameObject explosion;
+	public float health = 10;
 
 	// Use this for initialization
 	void Start () {
@@ -18,15 +19,18 @@ public class Enemy : MonoBehaviour {
 		if (layerName != "Bullet (Player)")
 			return;
 
-		Destroy (other.gameObject);
-		Explode ();
 
-		Destroy (gameObject);
+		health--;
+		Destroy (other.gameObject);
+		if (health <= 0) {
+			Explode ();
+			Destroy (gameObject);
+		}
 
 	}
 
 	void Explode(){
-		Instantiate (explostion, transform.position, transform.rotation);
+		Instantiate (explosion, transform.position, transform.rotation);
 	}
 	
 }

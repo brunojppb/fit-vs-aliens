@@ -3,8 +3,13 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
-	public float moveSpeed = 5f;
+	[Header("Player Attributes")]
+	public float moveSpeed = 5.0f;
+	public float health = 100.0f;
+
+	[Header("Spaceship Components")]
 	public Cannon[] cannons;
+	public GameObject explosion;
 
 	private float move;
 	private float minimumX, maximumX, minimumY, maximumY;
@@ -16,9 +21,12 @@ public class Player : MonoBehaviour {
 	}
 
 	void Update () {
-		PlayerMovement ();
 		Shoot ();
+	}
 
+	//Physics control
+	void FixedUpdate(){
+		PlayerMovement ();
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
@@ -27,6 +35,12 @@ public class Player : MonoBehaviour {
 
 		if (layerName == "Bullet (Enemy)") {
 			Destroy(other.gameObject);
+			health--;
+		}
+
+		if (health <= 0) {
+			Explode();
+			Destroy(gameObject);
 		}
 
 	}
@@ -73,5 +87,9 @@ public class Player : MonoBehaviour {
 				can.Shoot();
 			}
 		}
+	}
+
+	void Explode(){
+		Instantiate (explosion, transform.position, transform.rotation);
 	}
 }
