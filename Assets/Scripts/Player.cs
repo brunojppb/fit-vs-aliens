@@ -59,11 +59,11 @@ public class Player : MonoBehaviour {
 		
 		if (Input.GetAxis ("Vertical") != 0) {
 			move = Input.GetAxis ("Vertical");
-			transform.Translate(Vector3.up * Mathf.Clamp(move, -1, 1) * moveSpeed);
+			transform.Translate(Vector3.up * Mathf.Clamp(move, -1, 1) * moveSpeed * Time.deltaTime);
 		}
 		if (Input.GetAxis ("Horizontal") != 0) {
 			move = Input.GetAxis ("Horizontal");
-			transform.Translate(Vector3.right * Mathf.Clamp(move, -1, 1) * moveSpeed);
+			transform.Translate(Vector3.right * Mathf.Clamp(move, -1, 1) * moveSpeed * Time.deltaTime);
 		}
 
 		float actualXPosition = transform.position.x;
