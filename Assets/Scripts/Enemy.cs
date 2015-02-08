@@ -31,6 +31,8 @@ public class Enemy : MonoBehaviour {
 
 	void Explode(){
 		Instantiate (explosion, transform.position, transform.rotation);
+		AudioSource audio = GetComponent<AudioSource> () as AudioSource;
+		audio.Play ();
 	}
-	
+
 }

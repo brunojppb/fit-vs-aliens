@@ -9,7 +9,7 @@ public class Spaceship : MonoBehaviour {
 	public Cannon[] cannons;
 	public bool canShot;
 
-	IEnumerator Start(){
+	IEnumerator ActivateCanions(){
 		if (canShot) {
 			while (true) {
 				Shoot();
@@ -26,6 +26,14 @@ public class Spaceship : MonoBehaviour {
 
 	public void Move(Vector2 direction){
 		rigidbody2D.velocity = direction * moveSpeed;
+	}
+
+	void OnBecameVisible(){
+		StartCoroutine ("ActivateCanions");
+	}
+
+	void OnBecameInvisible(){
+		StopCoroutine ("ActivateCanions");
 	}
 
 
