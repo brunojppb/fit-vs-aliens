@@ -6,6 +6,7 @@ public class Player : MonoBehaviour {
 	[Header("Player Attributes")]
 	public float moveSpeed = 5.0f;
 	public float health = 100.0f;
+	public float healthHit = 5.0f;
 
 	[Header("Spaceship Components")]
 	public Cannon[] cannons;
@@ -35,7 +36,7 @@ public class Player : MonoBehaviour {
 
 		if (layerName == "Bullet (Enemy)") {
 			Destroy(other.gameObject);
-			health--;
+			health -= healthHit;
 		}
 
 		if (health <= 0) {
@@ -48,10 +49,10 @@ public class Player : MonoBehaviour {
 	//Calculate screen width and height to manipulate the player inside the screen
 	void CalculateDistances(){
 		float distanceZ = this.transform.position.z - Camera.main.transform.position.z;
-		minimumX = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, distanceZ)).x + (renderer.bounds.size.x/2);
-		maximumX = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, distanceZ)).x - (renderer.bounds.size.x/2);
-		minimumY = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, distanceZ)).y + (renderer.bounds.size.y/2);
-		maximumY = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height, distanceZ)).y - (renderer.bounds.size.y/2);
+		minimumX = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, distanceZ)).x + (GetComponent<Renderer>().bounds.size.x/2);
+		maximumX = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, distanceZ)).x - (GetComponent<Renderer>().bounds.size.x/2);
+		minimumY = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, distanceZ)).y + (GetComponent<Renderer>().bounds.size.y/2);
+		maximumY = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height, distanceZ)).y - (GetComponent<Renderer>().bounds.size.y/2);
 	}
 
 	//Move the player around (inside the limits)
