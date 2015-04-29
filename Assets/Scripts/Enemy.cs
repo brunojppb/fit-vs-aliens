@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour {
 
 		health--;
 		Destroy (other.gameObject);
+		GamePlayUI.addPoints ();
 		if (health <= 0) {
 			Explode ();
 			Destroy (gameObject);
