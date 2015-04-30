@@ -5,13 +5,18 @@ public class Boss : MonoBehaviour {
 
 	public int health = 10;
 	public Cannon[] cannions;
-	public GameObject[] explosionEffects;
+	public GameObject[] effects;
+	public GameObject explosion;
 	private bool moveDirection = true;
+	private int totalHealth;
 
 	// Use this for initialization
 	void Start () {
-		StartCoroutine("MoveAround");
+//		StartCoroutine("MoveAround");
+		StartCoroutine("ShowUp");
 		StartCoroutine("Shoot");
+
+		totalHealth = health;
 	}
 	
 	// Update is called once per frame
@@ -24,11 +29,20 @@ public class Boss : MonoBehaviour {
 		if (layerName != "Bullet (Player)")
 			return;
 
+		if (health <= (totalHealth / 2.0)) {
+			effects[0].SetActive(true);
+		}
+
+		if (health <= totalHealth / 3.0) {
+			effects[1].SetActive(true);
+		}
+
 		Destroy (other.gameObject);
 		GamePlayUI.addPoints ();
 		if (health > 0) {
-						health--;
+			health--;
 		} else {
+			Explode();
 			Destroy(this.gameObject);
 		}
 	}
@@ -40,6 +54,21 @@ public class Boss : MonoBehaviour {
 			}
 			yield return new WaitForSeconds(0.5f);
 		}
+	}
+
+	IEnumerator ShowUp(){
+		while (true) {
+			transform.position = new Vector3(transform.position.x, transform.position.y - 0.03f, transform.position.z);
+			yield return new WaitForSeconds(0.001f);
+			if(transform.position.y < 4.0f)
+				break;
+		}
+		StartCoroutine("MoveAround");
+
+	}
+
+	void Explode(){
+		Instantiate (explosion, transform.position, transform.rotation);
 	}
 
 	IEnumerator MoveAround(){
@@ -56,7 +85,7 @@ public class Boss : MonoBehaviour {
 				transform.position = new Vector3(transform.position.x - 0.02f, transform.position.y, transform.position.z);
 				counter--;
 				yield return new WaitForSeconds(0.01f);
-				if(counter <= 0)
+				if(counter <= -300)
 					moveDirection = true;
 			}
 		}
