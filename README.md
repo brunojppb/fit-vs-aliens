@@ -15,3 +15,11 @@ Main features:
 Game engine:
 
 * Unity 3D
+
+Playable Version
+================
+
+Links:
+[Web Game](http://my.fit.edu/~bdearaujopau2014/games/fitvsaliens/)
+[MAC](http://my.fit.edu/~bdearaujopau2014/games/fitvsaliens/MAC.zip)
+[Windows](http://my.fit.edu/~bdearaujopau2014/games/fitvsaliens/WINDOWS.zip)
