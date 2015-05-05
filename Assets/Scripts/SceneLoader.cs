@@ -19,6 +19,8 @@ public class SceneLoader : MonoBehaviour {
 		gameMusic.Play ();
 		yield return new WaitForSeconds (2.0f);
 		this.storyText.enabled = true;
+		yield return new WaitForSeconds (60.0f);
+		LoadGameplay ();
 
 	}
 }
