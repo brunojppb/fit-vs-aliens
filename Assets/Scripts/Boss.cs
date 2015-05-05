@@ -70,6 +70,7 @@ public class Boss : MonoBehaviour {
 	void Explode(){
 		GamePlayUI UImanager = GameObject.FindGameObjectWithTag("UIManager").transform.GetComponent<GamePlayUI>() as GamePlayUI;
 		UImanager.ShowGameOverPanel ();
+		UImanager.ShowWinnerMessage ();
 		Instantiate (explosion, transform.position, transform.rotation);
 	}
 

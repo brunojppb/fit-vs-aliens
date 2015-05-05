@@ -6,11 +6,12 @@ public class GamePlayUI : MonoBehaviour {
 
 	[Header("UI Components")]
 	public Slider healthBar;
-	public Text playerName;
 	public static Text playerScore;
 	public GameObject gameOverPanel;
 	public GameObject userPanel;
 	public Text GameOverScore;
+	public Text gameOverText;
+	public Text explanationText;
 
 	[Header("Player Object")]
 	public Player player;
@@ -36,6 +37,8 @@ public class GamePlayUI : MonoBehaviour {
 	public void ShowGameOverPanel(){
 		gameOverPanel.SetActive (true);
 		GameOverScore.text = playerScore.text;
+		if (GamePlayUI.playerScore.text == "0")
+			this.explanationText.text = "";
 		userPanel.SetActive (false);
 	}
 
@@ -45,6 +48,10 @@ public class GamePlayUI : MonoBehaviour {
 
 	public void ReloadLevel(){
 		Application.LoadLevel ("GamePlay");
+	}
+
+	public void ShowWinnerMessage(){
+		this.gameOverText.text = "You saved the President";
 	}
 
 	public static void addPoints(){
